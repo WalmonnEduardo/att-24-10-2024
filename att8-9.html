@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <p class="m"></p>
+    <p class="l"></p>
+    <button class="escuro">Escuro</button>
+    <button class="claro">Claro</button>
+    <script>
+        let input = document.querySelector('input');
+        let m = document.querySelector('.m');
+        let l = document.querySelector('.l');
+        let e = document.querySelector('.escuro');
+        let c = document.querySelector('.claro');
+        input.addEventListener('keyup',()=>{
+            let str = input.value;
+            let tamanho = str.length;
+            if(tamanho > 3)
+            {
+                if(str == "chocolate")
+                {
+                    l.innerText = "Eu amo sorvete de chocolate!";
+                }
+                else if(str == "flocos")
+                {
+                    l.innerText = "Ah, mas chocolate é meu favorito!";
+                }
+                else
+                {
+                    l.innerText = "Eu esperava um sabor de sorvete!";
+                }
+            }     
+            m.innerText = "A palavra \""+str+"\" tem "+tamanho;
+        });
+        e.addEventListener("click",()=>{
+            document.body.style.backgroundColor = "black"
+            document.body.style.color = "white"
+        });
+        c.addEventListener("click",()=>{
+            document.body.style.backgroundColor = "white"
+            document.body.style.color = "black"
+        });
+    </script>
+</body>
+</html>
