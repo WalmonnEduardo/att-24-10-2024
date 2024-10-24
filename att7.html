@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="https://pm1.aminoapps.com/6827/97fc79279650df2322ed0f43c6aef3bc592357b0v2_hq.jpg" alt="Foi mal">
+    <p></p>
+    <script>
+        let contar = 10;
+        let img = document.querySelector("img");
+        let p = document.querySelector("p");
+        img.addEventListener("click",()=>{
+            p.textContent = "Não me toque!";
+            let interval = setInterval(()=>{
+                if(contar == 0)
+                {
+                    p.textContent = "Eu sou o mestre";
+                    contar = 10
+                    clearInterval(interval);
+                }
+                contar --;
+            },1000);
+        })
+        img.addEventListener("mouseenter",()=>{
+            p.textContent = "Esse rato está se movendo em cima de mim! Tire ele eu tenho nojo";
+            let interval = setInterval(()=>{
+                if(contar == 0)
+                {
+                    p.textContent = "Eu sou o mestre";
+                    contar = 10
+                    clearInterval(interval);
+                }
+                contar --;
+            },1000);
+        })
+        img.addEventListener("mouseleave",()=>{
+            p.textContent = "Obrigado por tirar esse rato de cima de mim!";
+            let interval = setInterval(()=>{
+                if(contar == 0)
+                {
+                    p.textContent = "Eu sou o mestre";
+                    contar = 10
+                    clearInterval(interval);
+                }
+                contar --;
+            },1000);
+        })
+    </script>
+</body>
+</html>
