@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        
+    </ul>
+    <button>Aqui</button>
+    <script>
+        let contar = 1;
+        let ul = document.querySelector('ul');
+        let botao = document.querySelector('button');
+        let p = document.querySelector('p');
+        botao.addEventListener("click",()=>{
+            let li = document.createElement("li");
+            li.innerText = "Item "+contar;
+            contar++;
+            ul.appendChild(li);
+        });
+    </script>
+</body>
+</html>
