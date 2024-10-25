@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+        }
+        .caixaf{
+            display: flex;
+            flex-direction: column;
+        }
+        .caixafb{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        main{
+            height: 500px;
+            color: white;
+            background-color: black;
+            border-radius: 50px;
+            width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: solid blue 3px;
+        }
+        form{
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        label{
+            color: blue;
+        }
+        input{
+            width: 400px;
+            color: white;
+            background-color: black;
+            outline: none;
+        }
+        input.invalido{
+            border:solid red 3px
+        }
+        input[type="submit"]{
+            width: 100px;
+            border-radius: 10px;
+            color: blue;
+        }
+        span{
+            color: red;
+        }
+        button{
+            background-color: gray;
+            border-radius: 10px;
+            width: 50px;
+        }
+        .erro{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <form action="#" method="post">
+            <div class="caixaf">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" placeholder="Informe seu nome">
+                <span class="erro">O nome deve ter pelo menos 3 caracteres</span>
+            </div>
+            <div class="caixaf">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" placeholder="Informe seu email">
+                <span class="erro">O email precisa precisa dser válido</span>
+            </div>
+            <div class="caixaf">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" placeholder="Informe sua senha">
+                <span class="erro">A senha precisa ter 8 caracteres</span>
+                <button class="alternarS">&#128065;</button>
+            </div>
+            <div class="caixaf">
+                <label for="csenha">Confirmar senha:</label>
+                <input type="password" name="csenha" id="csenha" placeholder="Confirme sua senha">
+                <span class="erro">A confirmação não corresponde à senha</span>
+                <button class="alternarCS">&#128065;</button>
+            </div>
+            <div class="caixafb">
+                <input type="submit"></input>
+            </div>
+        </form>
+    </main>
+    <script>
+        let bom = 0;
+        const inputs = document.querySelectorAll('input');
+        const erros = document.querySelectorAll('.erro');
+        let border = document.querySelector('main');
+        let certo = null;
+        function validaNome()
+        {
+            if(inputs[0].value.length < 3)
+            {
+                erros[0].style.display = 'block';
+                inputs[0].classList.add('invalido');
+                certo = false;
+                cor(certo);
+                bom--;
+            }
+            else
+            {
+                erros[0].style.display = 'none';
+                inputs[0].classList.remove('invalido');
+                certo = null;
+                bom++;
+                blz();
+            }
+        }
+        function validaEmail()
+        {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(!emailRegex.test(inputs[1].value))
+            {
+                erros[1].style.display = 'block';
+                inputs[1].classList.add('invalido');
+                certo = false;
+                cor(certo);
+                bom--;
+            }
+            else
+            {
+                erros[1].style.display = 'none';
+                inputs[1].classList.remove('invalido');
+                certo = null;
+                bom++;
+                blz(bom);
+            }   
+        }
+        function validaSenha()
+        {
+            const senhaRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+            if(!senhaRegex.test(inputs[2].value))
+            {
+                erros[2].style.display = 'block';
+                inputs[2].classList.add('invalido');
+                certo = false;
+                cor(certo);
+                bom--;
+            }
+            else
+            {
+                erros[2].style.display = 'none';
+                inputs[2].classList.remove('invalido');
+                certo = null;
+                bom++;
+                blz();
+            }   
+        }   
+        function validaCSenha()
+        {
+            if(inputs[3].value !== inputs[2].value)
+            {
+                erros[3].style.display = 'block';
+                inputs[3].classList.add('invalido');
+                certo = false;
+                cor(certo);
+                bom--;
+            }
+            else
+            {
+                erros[3].style.display = 'none';
+                inputs[3].classList.remove('invalido');
+                bom++;
+                blz();
+                
+            }   
+        }
+        function blz()
+        {
+            if(bom == 4)
+            {
+                certo = true;
+            }
+            else
+            {
+                certo = null;
+            }
+            cor(certo)
+        }
+        inputs[0].addEventListener('input',validaNome);
+        inputs[1].addEventListener('input',validaEmail);
+        inputs[2].addEventListener('input',validaSenha);
+        inputs[3].addEventListener('input',validaCSenha);
+
+        document.querySelector('form').addEventListener('submit',(evento)=>{
+            evento.preventDefault();
+            bom = 0;
+            validaNome();
+            validaEmail();
+            validaSenha();
+            validaCSenha();
+        });
+        document.querySelector('.alternarS').addEventListener('click',()=>{
+            const tipoA = inputs[2].getAttribute('type');
+            const tipo = tipoA == 'password'?'text':'password';
+            inputs[2].setAttribute('type',tipo);
+        });
+        document.querySelector('.alternarCS').addEventListener('click',()=>{
+            const tipoA = inputs[3].getAttribute('type');
+            const tipo = tipoA == 'password'?'text':'password';
+            inputs[3].setAttribute('type',tipo);
+        });
+        
+        function cor(certo)
+        {
+            if(certo == true)
+            {
+                border.style.border = 'solid #06D001 3px';
+            }
+            else if(certo == false)
+            {
+                border.style.border = 'solid red 3px';
+            }
+            else
+            {
+                border.style.border = 'solid blue 3px';
+            }
+        }
+    </script>
+</body>
+</html>
